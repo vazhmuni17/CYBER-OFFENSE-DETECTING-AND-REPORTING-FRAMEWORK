@@ -1,0 +1,85 @@
+================================================================
+  CODAR - SETUP & RUN GUIDE (Windows)
+================================================================
+
+STEP 1 - ADD YOUR API KEYS (do this before anything else)
+----------------------------------------------------------
+Open these files and replace YOUR_CONSUMER_KEY etc with real keys:
+
+  Twitter_Bulk_Analysis/twitter_mysql.py  (lines 13-16)
+  Reporting_Platform/app.py               (lines 23-24)
+  Content_Moderation/main.py              (lines 21-24)
+
+Get Twitter API keys from: https://developer.twitter.com/en/apps
+
+
+STEP 2 - DOWNLOAD MODEL FILES
+----------------------------------------------------------
+Place these 2 files in EACH of these folders:
+  - model_nsfw.pt
+  - model_initial_text.pt
+
+Folders:
+  Social_Media_Platform/models/
+  Reporting_Platform/models/
+  Twitter_Bulk_Analysis/models/
+
+Download from Kaggle (see models/README.txt inside each folder)
+
+
+STEP 3 - START DOCKER SERVICES
+----------------------------------------------------------
+Open CMD as Administrator:
+
+  docker run -d --name mongodb -p 27017:27017 mongo
+  docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=0000 -p 3306:3306 mysql
+  docker run -d --name grafana -p 3000:3000 grafana/grafana
+
+Daily start (after first time):
+  docker start mongodb mysql grafana
+
+
+STEP 4 - CREATE MYSQL DATABASE
+----------------------------------------------------------
+  docker exec -it mysql mysql -uroot -p0000
+
+Then paste:
+  CREATE DATABASE tweet_monitoring;
+  USE tweet_monitoring;
+  CREATE TABLE tweets (id VARCHAR(50), dt_object DATETIME, created_at VARCHAR(50), username VARCHAR(100), profile_pic VARCHAR(255), tweet_type VARCHAR(20), tweet_text TEXT, media_url VARCHAR(255), location VARCHAR(100), latitude VARCHAR(20), longitude VARCHAR(20), text_toxicity FLOAT, image_class VARCHAR(50));
+  CREATE TABLE hashtags (hashtag VARCHAR(100));
+  EXIT;
+
+
+STEP 5 - INSTALL PYTHON DEPENDENCIES
+----------------------------------------------------------
+  python -m venv .venv
+  .venv\Scripts\activate
+  pip install -r Social_Media_Platform/requirements.txt
+  pip install -r Content_Moderation/requirements.txt
+  pip install -r Reporting_Platform/requirements.txt
+  pip install tweepy pymysql geocoder transformers
+
+
+STEP 6 - RUN THE MODULES (each in separate CMD window)
+----------------------------------------------------------
+  cd Social_Media_Platform  --> python app.py  --> http://localhost:3000
+  cd Reporting_Platform     --> python app.py  --> http://localhost:3003
+  cd Dashboard              --> python app.py  --> http://localhost:3007
+  cd Content_Moderation     --> python main.py --> http://localhost:5001
+  cd Twitter_Bulk_Analysis  --> python twitter_mysql.py
+
+  Grafana Dashboard: http://localhost:3000
+
+
+PORTS SUMMARY
+----------------------------------------------------------
+  Social_Media_Platform   : 3000
+  Reporting_Platform      : 3003
+  Dashboard               : 3007
+  Content_Moderation      : 5001
+  Grafana                 : 3000  (open in browser)
+  MongoDB                 : 27017
+  MySQL                   : 3306
+
+================================================================

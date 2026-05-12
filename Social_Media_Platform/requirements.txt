@@ -1,0 +1,8 @@
+flask
+pymongo
+bcrypt
+python-opengraph-jaywink
+torch
+torchvision
+transformers
+pillow

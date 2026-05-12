@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ video.content.postcontent }} - YouTube</title>
+    <style>
+        body {
+            background-color: #fff;
+            font-family: Roboto, Arial, sans-serif;
+            margin: 0;
+            color: #030303;
+        }
+        .header {
+            background-color: #fff;
+            height: 56px;
+            padding: 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header .logo {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #000;
+        }
+        .header .logo .yt-icon {
+            color: #ff0000;
+            font-size: 28px;
+            margin-right: 4px;
+        }
+        
+        .main-container {
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+            max-width: 1700px;
+            margin: 0 auto;
+        }
+        .video-column {
+            flex-grow: 1;
+            max-width: 1280px;
+        }
+        .video-player-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .video-details {
+            margin-top: 12px;
+        }
+        .video-details h1 {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 0 12px 0;
+        }
+        .channel-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .channel-left {
+            display: flex;
+            align-items: center;
+        }
+        .channel-left .avatar {
+            width: 40px;
+            height: 40px;
+            background: #ddd;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+        .channel-left .name-box h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+        .channel-left .name-box p {
+            margin: 0;
+            font-size: 12px;
+            color: #606060;
+        }
+        .subscribe-btn {
+            background: #0f0f0f;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 18px;
+            font-weight: 500;
+            margin-left: 24px;
+            cursor: pointer;
+        }
+        
+        .description-box {
+            background: #f2f2f2;
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+        
+        .sidebar {
+            width: 400px;
+            margin-left: 24px;
+        }
+        .related-video {
+            display: flex;
+            margin-bottom: 8px;
+            text-decoration: none;
+            color: #030303;
+        }
+        .related-video .thumb {
+            width: 168px;
+            height: 94px;
+            background: #eee;
+            border-radius: 8px;
+            margin-right: 8px;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .related-video .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .related-video .info h4 {
+            margin: 0;
+            font-size: 14px;
+            line-height: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .related-video .info p {
+            margin: 4px 0 0;
+            font-size: 12px;
+            color: #606060;
+        }
+        
+        /* Blurring */
+        .blurred {
+            filter: blur(50px);
+        }
+        .blur-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            color: #fff;
+            text-align: center;
+            padding: 40px;
+        }
+        .blur-overlay h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+        .blur-overlay p {
+            font-size: 16px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/" class="logo">
+            <span class="yt-icon">▶</span>
+            YouTube <span style="font-weight:normal; font-size:12px; vertical-align:top; color:#606060">Clone</span>
+        </a>
+    </div>
+
+    <div class="main-container">
+        <div class="video-column">
+            <div class="video-player-container">
+                {% if video.is_blurred %}
+                <div class="blur-overlay">
+                    <div>
+                        <h2>⚠️ Content Restricted</h2>
+                        <p>This video has been flagged for violating our community guidelines.</p>
+                        <p style="font-size:14px; margin-top:10px;">The Reporting Platform identified offensive or restricted content.</p>
+                    </div>
+                </div>
+                {% endif %}
+                <video controls class="{% if video.is_blurred %}blurred{% endif %}">
+                    <source src="/{{ video.content.medialink }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="video-details">
+                <h1>{{ video.content.postcontent }}</h1>
+                <div class="channel-info">
+                    <div class="channel-left">
+                        <div class="avatar"></div>
+                        <div class="name-box">
+                            <h3>{{ video.fullname }}</h3>
+                            <p>1.2M subscribers</p>
+                        </div>
+                        <div class="subscribe-btn">Subscribe</div>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button style="background:#f2f2f2; border:none; padding:8px 16px; border-radius:18px; font-weight:500;">👍 45K</button>
+                        <button class="action-btn" style="background:#f2f2f2; border:none; padding:8px 16px; border-radius:18px; font-weight:500; cursor:pointer;" onclick="copyVideoLink('{{ video.id }}')">🔗 Copy Link</button>
+                        <button id="reportBtn" style="background:#f2f2f2; border:none; padding:8px 16px; border-radius:18px; font-weight:500; cursor:pointer;" onclick="copyVideoLink('{{ video.id }}')">🚩 Report</button>
+                        <button style="background:#f2f2f2; border:none; padding:8px 16px; border-radius:18px; font-weight:500;">...</button>
+                    </div>
+                </div>
+                <div class="description-box">
+                    <p style="font-weight:bold; margin-bottom:4px;">124K views • {{ video.date.strftime('%b %d, %Y') }}</p>
+                    <p>This is a simulated video for the CODAR project real-time content moderation demonstration.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <h3 style="font-size:16px; margin-top:0;">Related videos</h3>
+            {% for other in videos %}
+            {% if other.id != video.id %}
+            <a href="/watch/{{ other.id }}" class="related-video">
+                <div class="thumb">
+                    {% if other.content.medialink.lower().endswith(('.mp4', '.webm', '.ogg')) %}
+                    <video class="{% if other.is_blurred %}blurred{% endif %}" style="width: 100%; height: 100%; object-fit: cover;">
+                        <source src="/{{ other.content.medialink }}">
+                    </video>
+                    {% else %}
+                    <img src="/{{ other.content.medialink }}" alt="Thumb" class="{% if other.is_blurred %}blurred{% endif %}">
+                    {% endif %}
+                </div>
+                <div class="info">
+                    <h4>{{ other.content.postcontent }}</h4>
+                    <p>{{ other.fullname }}</p>
+                    <p>12K views • 2 days ago</p>
+                </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        function copyVideoLink(videoId) {
+            const url = window.location.origin + "/watch/" + videoId;
+            navigator.clipboard.writeText(url).then(() => {
+                alert("Link copied! Paste this into the Reporting Platform (localhost:3003) to trigger real-time blurring.");
+            });
+        }
+    </script>
+</body>
+</html>

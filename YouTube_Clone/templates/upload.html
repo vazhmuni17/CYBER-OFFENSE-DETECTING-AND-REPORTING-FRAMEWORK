@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - YouTube</title>
+    <style>
+        body {
+            background-color: #f9f9f9;
+            font-family: Roboto, Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .header {
+            background-color: #fff;
+            width: 100%;
+            height: 56px;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            box-sizing: border-box;
+        }
+        .header .logo {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #000;
+        }
+        .header .logo .yt-icon {
+            color: #ff0000;
+            font-size: 28px;
+            margin-right: 4px;
+        }
+        
+        .upload-card {
+            background: #fff;
+            width: 90%;
+            max-width: 960px;
+            margin: 40px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .upload-header {
+            padding: 24px;
+            border-bottom: 1px solid #e5e5e5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .upload-header h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+        .upload-body {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .upload-icon {
+            width: 136px;
+            height: 136px;
+            background: #f9f9f9;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 64px;
+            color: #909090;
+            margin-bottom: 24px;
+        }
+        .info-text {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .info-text p {
+            margin: 4px 0;
+            color: #606060;
+            font-size: 14px;
+        }
+        
+        form {
+            width: 100%;
+            max-width: 500px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            background: #f2f2f2;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .submit-btn {
+            background-color: #065fd4;
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            float: right;
+        }
+        .submit-btn:hover {
+            background-color: #0556bf;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/" class="logo">
+            <span class="yt-icon">▶</span>
+            YouTube <span style="font-weight:normal; font-size:12px; vertical-align:top; color:#606060">Clone</span>
+        </a>
+    </div>
+
+    <div class="upload-card">
+        <div class="upload-header">
+            <h2>Upload videos</h2>
+            <span style="font-size:24px; color:#909090; cursor:pointer;">&times;</span>
+        </div>
+        <div class="upload-body">
+            <div class="upload-icon">⬆️</div>
+            <div class="info-text">
+                <p style="font-size:16px; color:#030303;">Select files to upload</p>
+                <p>Your videos will be private until you publish them.</p>
+            </div>
+            
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>Video Title</label>
+                    <input type="text" name="title" placeholder="Add a title that describes your video" required>
+                </div>
+                <div class="form-group">
+                    <label>Select Video File</label>
+                    <input type="file" name="video" accept="video/*" required>
+                </div>
+                <button type="submit" class="submit-btn" style="background-color: #065fd4; color: white;">SELECT FILES</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

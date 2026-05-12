@@ -1,0 +1,70 @@
+</div>
+</div>
+<footer class="bg-white sticky-footer">
+    <div class="container my-auto">
+        <div class="text-center my-auto copyright">
+            <span>Bureau of Police Research &amp; Development</span>
+        </div>
+    </div>
+</footer>
+</div>
+<a class="border rounded d-inline scroll-to-top" href="#page-top">
+    <i class="fa fa-angle-double-up"></i>
+</a>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="static/assets/js/indian_cities.js"></script>
+<script src="static/assets/js/theme.js"></script>
+<script type="text/javascript">
+    // To Display FB Post, Comments and Videos
+    function display_fb_post(){
+        var link = document.getElementById("fb_link").value;
+        var type = document.getElementById("fb_type").value;
+        var iframe = document.getElementById("fb-widget");
+        if(!link) return;
+        if(type=="posts" || type=="videos"){
+            iframe.src = "https://www.facebook.com/plugins/post.php?href="+encodeURIComponent(link)+"&show_text=1&width=550";
+        }
+        else if(type=="comments"){
+            iframe.src = "https://www.facebook.com/plugins/comment_embed.php?href="+encodeURIComponent(link)+"&include_parent=true&width=550&height=550&appId";
+        }
+    }
+    // To Display tweets
+    function display_tweet(){
+        var link = document.getElementById("tweet_link").value;
+        var iframe = document.getElementById("twitter-widget-2");
+        if(!link) return;
+        iframe.src = "https://twitframe.com/show?url="+encodeURIComponent(link);
+    }
+    function display_youtube(){
+        var link = document.getElementById("yt_link").value;
+        var iframe = document.getElementById("youtube-widget-2");
+        if(!link) return;
+        
+        var videoId = "";
+        if (link.includes("youtu.be/")) {
+            videoId = link.split("youtu.be/")[1].split(/[?#]/)[0];
+        } else if (link.includes("youtube.com/watch?v=")) {
+            videoId = link.split("watch?v=")[1].split(/[&#]/)[0];
+        } else if (link.includes("youtube.com/shorts/")) {
+            videoId = link.split("shorts/")[1].split(/[?#]/)[0];
+        } else if (link.includes("youtube.com/embed/")) {
+            videoId = link.split("embed/")[1].split(/[?#]/)[0];
+        }
+        
+        if (videoId) {
+            iframe.src = "https://www.youtube.com/embed/" + videoId;
+        }
+    }
+
+    $(document).ready(function() {
+        $("#yt_link").on("input", display_youtube);
+        $("#tweet_link").on("input", display_tweet);
+        $("#fb_link").on("input", display_fb_post);
+        $("#fb_type").on("change", display_fb_post);
+    });
+</script>
+</body>
+</html>

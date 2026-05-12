@@ -1,0 +1,102 @@
+{% include 'blocks/index-head-nav.html' %}
+<div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Complaints</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="stat-total">{{ stats.total }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Blurred Posts</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="stat-blurred">{{ stats.blurred }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">FB detections</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="stat-facebook">{{ stats.facebook }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-danger shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">YT detections</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="stat-youtube">{{ stats.youtube }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Recent Complaints</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="complaintsTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Platform</th>
+                        <th>Reason</th>
+                        <th>Links</th>
+                        <th>Timestamp</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for complaint in complaints %}
+                    <tr>
+                        <td>{{ complaint.id }}</td>
+                        <td>{{ complaint.type|capitalize }}</td>
+                        <td>{{ complaint.reason }}</td>
+                        <td><a href="{{ complaint.link }}" target="_blank">View Post</a></td>
+                        <td>{{ complaint.timestamp.strftime('%Y-%m-%d %H:%M') if complaint.timestamp else 'N/A' }}</td>
+                        <td><span class="badge badge-{% if complaint.status == 'pending' %}warning{% else %}success{% endif %}">{{ complaint.status }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateStats() {
+        fetch('/api/stats')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('stat-total').innerText = data.total;
+                document.getElementById('stat-blurred').innerText = data.blurred;
+                document.getElementById('stat-facebook').innerText = data.facebook;
+                document.getElementById('stat-youtube').innerText = data.youtube;
+            });
+    }
+    // Poll every 5 seconds
+    setInterval(updateStats, 5000);
+</script>
+
+{% include 'blocks/index-footer.html' %}

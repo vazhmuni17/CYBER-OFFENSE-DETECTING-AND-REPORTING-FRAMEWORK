@@ -1,0 +1,12 @@
+flask
+pymongo
+bcrypt
+tweepy
+torch
+torchvision
+transformers
+pillow
+opencv-python
+tqdm
+youtube-dl
+imageio
