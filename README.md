@@ -1,10 +1,7 @@
 <h1 align="center">
   <img src="https://imgur.com/4v9ghOJ.png">
 </h1>
-<p align="center">
-<a href=""><img title="Python3" src="https://img.shields.io/badge/Python-3-yellow?style=for-the-badge&logo=python"></a>
-<a href=""><img title="License" src="https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge&logo="></a>
-</p>
+
 
 
 ## Problem Statement
@@ -112,14 +109,3 @@ Action: Text has been blocked.
 - **[Jigsaw Toxic Comment Classification Dataset](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data)** for the dataset on **Text Toxicity Classification** 
 - Hat tip to anyone whose code was used.
 
-
-## License
-MIT © [Axenhammer](/LICENSE)
-
-
-<br><br>
-<p align="center">
-  Made with ❤️ by <a href="https://github.com/axenhammer"> Axemhammer</a>
-</p>
-
-![wave](http://cdn.thekrishna.in/img/common/border.png)
