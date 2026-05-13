@@ -107,15 +107,6 @@ Action: Text has been blocked.
 - Add credentails for your MySQL, Twitter API and MongoDB into the Flask Apps. Also, Import our Dashboard JSON into your Grafana Server and configure your data sources accordingly. 
 
 
-
-## Contributors
-
-| Krishnakanth Alagiri | Mahalakshumi V | Vignesh S | Nivetha MK |
-|----------------------|----------------|-----------|------------|
-| [![f](https://avatars1.githubusercontent.com/u/39209037?s=86)](https://github.com/bearlike) | [![f](https://avatars2.githubusercontent.com/u/40058339?s=86)](https://github.com/mahavisvanathan) | [![f](https://avatars3.githubusercontent.com/u/42212364?s=86)](https://github.com/Vignesh0404) | [![f](https://avatars2.githubusercontent.com/u/43270349?s=86)](https://github.com/nivethaakm99) | 
-| [@bearlike](https://github.com/bearlike) | [@mahavisvanathan](https://github.com/mahavisvanathan) | [@Vignesh0404](https://github.com/Vignesh0404) | [@nivethaakm99](https://github.com/nivethaakm99) |
-
-
 ## Acknowledgments
 - Our **[NSFW Image Classification Dataset](https://www.kaggle.com/dataset/360fbfce26b59056e60d5e9cd1cfa884c2d66c5b6f3b350254651cd136a41322)** for **Obscene Image Classification**.
 - **[Jigsaw Toxic Comment Classification Dataset](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data)** for the dataset on **Text Toxicity Classification** 
